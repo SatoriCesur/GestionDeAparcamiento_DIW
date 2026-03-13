@@ -6,6 +6,14 @@ body {
     min-height: 100vh;
 }
 
+.app-shell {
+    height: 100dvh;
+}
+
+.app-main-fit {
+    min-height: 0;
+}
+
 .glass-card {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);

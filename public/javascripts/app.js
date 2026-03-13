@@ -1,19 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 🌟 ALERTAS SWEETALERT2 🌟 ---
-    
-    // 1. Alerta de Bienvenida al iniciar sesión
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('login') === 'success') {
         Swal.fire({
             icon: 'success',
             title: '¡Bienvenido!',
             text: 'Has iniciado sesión correctamente. Sincronización en la nube activada.',
-            timer: 2500, // Se cierra solo a los 2.5 segundos
+            timer: 2500,
             showConfirmButton: false,
-            backdrop: `rgba(0,0,123,0.4)` // Fondo oscurecido azulado
+            backdrop: `rgba(0,0,123,0.4)` 
         });
-        // Limpiamos la URL para que no siga saliendo "?login=success" al recargar
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-// 2. Alerta de Confirmación al Desconectar
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) {
         btnLogout.addEventListener('click', (e) => {
@@ -54,13 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 🚗 LÓGICA DE LA APLICACIÓN 🚗 ---
-
     const btnAparcar = document.getElementById('btn-aparcar');
     const btnFinalizar = document.getElementById('btn-finalizar');
     const timerDisplay = document.getElementById('timer');
     const distDisplay = document.getElementById('distancia-texto');
     const infoAparcado = document.getElementById('info-aparcado');
+    const parkingCard = document.getElementById('parking-card');
 
     let intervaloCrono;
 
@@ -77,19 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.round(R * c);
     }
 
-    // --- LÓGICA DE LA PÁGINA DE INICIO ---
     function actualizarSeguimiento() {
         const coche = JSON.parse(localStorage.getItem('cocheAparcado'));
         if (!coche) return;
 
-        // Tiempo
         const diff = Date.now() - coche.timestamp;
         const horas = Math.floor(diff / 3600000).toString().padStart(2,'0');
         const mins = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
         const segs = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
         if(timerDisplay) timerDisplay.innerText = `${horas}:${mins}:${segs}`;
 
-        // Distancia
         navigator.geolocation.getCurrentPosition(pos => {
             const d = calcularDistancia(pos.coords.latitude, pos.coords.longitude, coche.lat, coche.lng);
             if(distDisplay) distDisplay.innerText = d;
@@ -101,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnAparcar.classList.add('d-none');
             btnFinalizar.classList.remove('d-none');
             infoAparcado.classList.remove('d-none');
+            if (parkingCard) parkingCard.classList.remove('rounded-pill');
             intervaloCrono = setInterval(actualizarSeguimiento, 1000);
         }
 
@@ -116,10 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     fecha: new Date().toLocaleString()
                 };
                 
-                // Persistencia Local
                 localStorage.setItem('cocheAparcado', JSON.stringify(datos));
 
-                // Persistencia Remota
                 fetch('/api/guardar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -148,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA DEL MAPA ---
     const contenedorMapa = document.getElementById('map');
     if (contenedorMapa) {
         const coche = JSON.parse(localStorage.getItem('cocheAparcado'));
@@ -183,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- LÓGICA DEL HISTORIAL ---
     const tablaHistorial = document.getElementById('tabla-historial');
     if (tablaHistorial) {
         const historial = JSON.parse(localStorage.getItem('historial')) || [];
@@ -211,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnBorrar = document.getElementById('btn-borrar-historial');
         if (btnBorrar) {
             btnBorrar.addEventListener('click', () => {
-                // Aquí también podríamos usar SweetAlert, pero de momento dejamos el confirm nativo para no recargarlo
                 if(confirm('¿Confirmas que deseas eliminar todo el historial de registros? Esta acción no se puede deshacer.')) {
                     localStorage.removeItem('historial');
                     location.reload();
