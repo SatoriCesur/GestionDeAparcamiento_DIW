@@ -1,139 +1,172 @@
 # Encuentra tu Coche
 
-Aplicación web para guardar la ubicación de un vehículo aparcado, visualizar su posición en un mapa y consultar historial de aparcamientos. Incluye autenticación básica para habilitar sincronización remota.
+<p align="center">
+	Aplicación web para registrar un vehículo aparcado, seguir distancia/tiempo en tiempo real y consultar historial de ubicaciones.
+</p>
 
-## Descripción
+<p align="center">
+	<img src="https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white" alt="Node" />
+	<img src="https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white" alt="Express" />
+	<img src="https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap" />
+	<img src="https://img.shields.io/badge/Leaflet-Map-199900?logo=leaflet&logoColor=white" alt="Leaflet" />
+	<img src="https://img.shields.io/badge/Licencia-ISC-blue" alt="Licencia" />
+</p>
 
-En entornos urbanos es común olvidar dónde se aparcó el coche. Este proyecto busca resolver ese problema con una interfaz simple y rápida:
+## Tabla de contenidos
 
-- Guardar la posición actual del vehículo.
-- Ver distancia y tiempo transcurrido desde el aparcamiento.
-- Mostrar mapa con ubicación del coche y del usuario.
-- Finalizar sesión de aparcamiento.
-- Consultar historial local de registros.
-- Sincronizar datos en "nube" cuando hay sesión iniciada.
+1. [Resumen](#resumen)
+2. [Funcionalidades](#funcionalidades)
+3. [Stack técnico](#stack-técnico)
+4. [Estructura del proyecto](#estructura-del-proyecto)
+5. [Instalación y ejecución](#instalación-y-ejecución)
+6. [Variables de entorno](#variables-de-entorno)
+7. [Flujo de uso](#flujo-de-uso)
+8. [Rutas principales](#rutas-principales)
+9. [Estado del proyecto](#estado-del-proyecto)
+10. [Roadmap](#roadmap)
+11. [Autor y licencia](#autor-y-licencia)
 
-## Funcionalidades principales
+## Resumen
 
-- Registro de aparcamiento con geolocalización del navegador.
-- Seguimiento en tiempo real de distancia al vehículo.
-- Cronómetro de sesión activa.
-- Mapa interactivo con Leaflet.
-- Historial de aparcamientos en localStorage.
-- Inicio/cierre de sesión con Express Session.
-- Notificaciones con SweetAlert2 (login/logout y confirmaciones).
+Este proyecto ayuda a encontrar un coche aparcado en ciudad mediante geolocalización del navegador.
 
-## Tecnologías usadas
+Objetivos principales:
 
-- Node.js
-- Express
-- EJS
-- Express Session
-- Bootstrap 5
-- Bootstrap Icons
-- Leaflet
-- SweetAlert2
-- localStorage (cliente)
+- Registrar coordenadas del vehículo en el momento de aparcar.
+- Mostrar distancia y tiempo transcurrido de la sesión activa.
+- Visualizar la posición en mapa interactivo.
+- Mantener historial local y sincronización remota con sesión iniciada.
+
+## Funcionalidades
+
+| Módulo | Descripción |
+|---|---|
+| Aparcamiento | Guarda ubicación actual del vehículo con fecha/hora. |
+| Seguimiento | Calcula distancia al coche y cronómetro en vivo. |
+| Mapa | Muestra coche y usuario con Leaflet. |
+| Historial | Lista aparcamientos finalizados desde localStorage. |
+| Autenticación | Login/Logout para habilitar sincronización en servidor. |
+| Alertas | Notificaciones con SweetAlert2 para eventos clave. |
+
+## Stack técnico
+
+- Backend: Node.js, Express, EJS, express-session
+- Frontend: Bootstrap 5, Bootstrap Icons, SweetAlert2
+- Mapas: Leaflet + OpenStreetMap
+- Persistencia: localStorage (cliente) + memoria de servidor (demo)
 
 ## Estructura del proyecto
 
-- app.js
-- bin/www
-- routes/index.js
-- middlewares/auth.js
-- views/index.ejs
-- views/mapa.ejs
-- views/historial.ejs
-- views/login.ejs
-- views/partials/nav.ejs
-- views/partials/footer.ejs
-- public/javascripts/app.js
-- public/stylesheets/style.css
-- .env
+```text
+Mi_coche/
+	app.js
+	bin/
+		www
+	middlewares/
+		auth.js
+	routes/
+		index.js
+		users.js
+	views/
+		index.ejs
+		mapa.ejs
+		historial.ejs
+		login.ejs
+		error.ejs
+		partials/
+			nav.ejs
+			footer.ejs
+	public/
+		javascripts/
+			app.js
+		stylesheets/
+			style.css
+	.env
+	package.json
+```
 
-## Requisitos previos
+## Instalación y ejecución
+
+Requisitos:
 
 - Node.js 18 o superior
 - npm
 
-## Instalación
-
-1. Clonar repositorio.
-2. Entrar en la carpeta del proyecto.
-3. Instalar dependencias:
+Instalación:
 
 ```bash
 npm install
 ```
 
-## Configuración de entorno
-
-Crear o revisar el archivo .env con:
-
-```env
-PORT=5000
-```
-
-## Ejecución
-
-Modo desarrollo (recomendado):
+Desarrollo:
 
 ```bash
 npm run dev
 ```
 
-Modo normal:
+Producción local:
 
 ```bash
 npm start
 ```
 
-Abrir en navegador:
+Aplicación en navegador:
 
 - http://localhost:5000
 
+## Variables de entorno
+
+Archivo `.env`:
+
+```env
+PORT=5000
+```
+
 ## Flujo de uso
 
-1. En Inicio, pulsar "Aparcar Vehículo Aquí" para guardar ubicación.
-2. Se activa el seguimiento con tiempo y distancia.
-3. En Mapa, visualizar ubicación del coche y del usuario.
-4. En Historial, revisar aparcamientos finalizados.
-5. Opcional: iniciar sesión para habilitar sincronización remota.
+1. Inicia sesión (opcional) para habilitar sincronización remota.
+2. Pulsa "Aparcar Vehículo Aquí" para guardar la posición.
+3. Revisa tiempo y distancia en la pantalla principal.
+4. Consulta la ubicación en la vista Mapa.
+5. Finaliza sesión para enviar el registro al historial.
 
-## Credenciales de prueba actuales
+Credenciales de prueba actuales:
 
-Usuario: Admin  
-Contraseña: 1234
+- Usuario: `Admin`
+- Contraseña: `1234`
 
 ## Rutas principales
 
-- GET /
-- GET /mapa
-- GET /historial
-- GET /login
-- POST /login
-- GET /logout
-- POST /api/guardar
+| Método | Ruta | Propósito |
+|---|---|---|
+| GET | `/` | Pantalla principal |
+| GET | `/mapa` | Vista de mapa |
+| GET | `/historial` | Vista de historial |
+| GET | `/login` | Formulario de acceso |
+| POST | `/login` | Autenticación |
+| GET | `/logout` | Cierre de sesión |
+| POST | `/api/guardar` | Sincronización remota |
 
-## Estado actual del proyecto
+## Estado del proyecto
 
-- Funcional para uso local.
-- Sincronización remota implementada en memoria de servidor (demostración).
-- Pendiente: persistencia remota real en base de datos.
+- Aplicación funcional para flujo local completo.
+- Autenticación básica operativa.
+- Sincronización remota disponible para demostración.
 
-## Mejoras recomendadas
+Limitaciones actuales:
 
-- Migrar autenticación a contraseñas hasheadas y usuarios en base de datos.
-- Usar variable de entorno para el secret de sesión.
-- Cambiar logout a método POST con protección CSRF.
-- Guardar historial remoto en MongoDB o PostgreSQL.
-- Añadir tests automáticos (unitarios e integración).
-- Incorporar PWA completa (manifest + service worker + offline robusto).
+- Persistencia remota en memoria (se reinicia al apagar servidor).
+- Logout implementado por GET (recomendable migrarlo a POST).
 
-## Autor
+## Roadmap
 
-Hamza Satori
+- Persistencia real en base de datos (MongoDB/PostgreSQL).
+- Hash de contraseñas y gestión de usuarios real.
+- CSRF para autenticación/logout.
+- Tests de integración y unitarios.
+- Modo PWA completo con manifest y service worker.
 
-## Licencia
+## Autor y licencia
 
-ISC
+- Autor: Hamza Satori
+- Licencia: ISC
