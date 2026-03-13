@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="/stylesheets/style.css?v=<%= assetVersion %>">
 </head>
-<body class="d-flex flex-column min-vh-100 bg-parking">
+<body class="d-flex flex-column vh-100 overflow-hidden bg-parking app-shell map-page">
     <%- include('partials/nav') %>
 
-    <main class="container py-4 flex-grow-1 d-flex flex-column">
+    <main class="container py-3 flex-grow-1 d-flex flex-column map-main">
         <div class="d-flex align-items-center mb-4">
             <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow-sm" style="width: 48px; height: 48px;">
                 <i class="bi bi-map fs-4"></i>
@@ -22,7 +22,7 @@
             </div>
         </div>
         
-        <div class="glass-card p-2 shadow-lg flex-grow-1 position-relative" style="background: rgba(255, 255, 255, 0.9);">
+        <div class="glass-card p-2 shadow-lg flex-grow-1 position-relative map-card" style="background: rgba(255, 255, 255, 0.9);">
             <div id="map"></div>
         </div>
         

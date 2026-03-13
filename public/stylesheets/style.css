@@ -23,6 +23,20 @@ body {
     min-height: 0;
 }
 
+.map-page {
+    overflow: hidden;
+}
+
+.map-page .map-main {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.map-page .map-card {
+    min-height: 0;
+    overflow: hidden;
+}
+
 .glass-card {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
@@ -43,6 +57,10 @@ body {
     width: 100%;
     border-radius: 1rem;
     z-index: 1;
+}
+
+.map-page #map {
+    height: 100%;
 }
 
 .table-hover tbody tr {
