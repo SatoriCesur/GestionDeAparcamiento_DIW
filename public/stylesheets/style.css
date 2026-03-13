@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.96rem;
     background: linear-gradient(135deg, #fdfbfb 0%, #e2ebf0 100%);
     min-height: 100vh;
 }
@@ -61,4 +62,20 @@ body {
 }
 .bg-purple-800 {
     background-color: #29045d;
+}
+
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 1040;
+}
+
+body.is-submitting-login .login-overlay {
+    opacity: 1;
+    visibility: visible;
 }
