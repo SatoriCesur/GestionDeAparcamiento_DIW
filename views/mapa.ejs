@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %> - Encuentra Mi Coche</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-parking">
+    <%- include('partials/nav') %>
+
+    <main class="container py-4 flex-grow-1 d-flex flex-column">
+        <div class="d-flex align-items-center mb-4">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow-sm" style="width: 48px; height: 48px;">
+                <i class="bi bi-map fs-4"></i>
+            </div>
+            <div>
+                <h2 class="mb-0 fw-bold text-white">Radar de Posición</h2>
+                <p class="text-light opacity-75 mb-0">Visualización satelital en tiempo real</p>
+            </div>
+        </div>
+        
+        <div class="glass-card p-2 shadow-lg flex-grow-1 position-relative" style="background: rgba(255, 255, 255, 0.9);">
+            <div id="map"></div>
+        </div>
+        
+        <div class="text-center mt-4 d-none" id="alerta-mapa">
+            <div class="alert alert-warning border-warning shadow-sm d-inline-flex align-items-center rounded-pill px-4">
+                <i class="bi bi-exclamation-triangle-fill fs-4 me-3 text-warning"></i>
+                <span class="fw-medium">No hay ningún vehículo registrado en el radar actualmente.</span>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/javascripts/app.js"></script>
+</body>
+</html>
