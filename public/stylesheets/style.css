@@ -1,10 +1,18 @@
+html {
+    font-size: 14.5px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.96rem;
+    font-size: 0.97rem;
     background: linear-gradient(135deg, #fdfbfb 0%, #e2ebf0 100%);
     min-height: 100vh;
+    line-height: 1.45;
+    overflow-x: hidden;
 }
 
 .app-shell {
@@ -62,6 +70,32 @@ body {
 }
 .bg-purple-800 {
     background-color: #29045d;
+}
+
+.login-page .login-card {
+    width: min(100%, 450px);
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.login-page .card-body {
+    padding: 2.25rem !important;
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 14px;
+    }
+
+    .login-page .card-body {
+        padding: 1.5rem !important;
+    }
+}
+
+@media (max-height: 780px) {
+    .login-page .login-card {
+        max-height: calc(100vh - 120px);
+    }
 }
 
 .login-overlay {
