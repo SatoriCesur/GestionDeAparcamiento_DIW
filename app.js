@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const assetVersion = process.env.RENDER_GIT_COMMIT || process.env.npm_package_version || 'dev';
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -27,6 +28,7 @@ app.use(session({
 // Middleware 
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario || null;
+  res.locals.assetVersion = assetVersion;
   next();
 });
 
